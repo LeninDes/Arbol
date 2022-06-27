@@ -1,0 +1,119 @@
+#include <iostream>
+
+using namespace std;
+
+class Nodo {	
+    int dato;
+    Nodo* hijoDerecho;
+    Nodo* hijoIzquierdo;
+public:
+    //Constructor - inicializar los atributos
+    Nodo(int dato)
+    {
+        this->dato = dato;
+        hijoDerecho = NULL;//por que no apuntamos a ningun nodo
+        hijoIzquierdo = NULL;//por que no apuntamos a ningun nodo
+    }
+    //getter and setter
+    int getDato()
+    {
+        return dato;
+    }
+    void setDato(int dato)
+    {
+        this->dato = dato;
+    }
+    Nodo* getHijoIzquierdo()
+    {
+        return this->hijoIzquierdo;
+    }
+    void setHijoIzquierdo(Nodo* enlace)
+    {
+        this->hijoIzquierdo = enlace;
+    }
+    Nodo* getHijoDerecho()
+    {
+        return this->hijoDerecho;
+    }
+    void setHijoDerecho(Nodo* enlace)
+    {
+        this->hijoDerecho = enlace;
+    }
+
+    void imprimir()
+    {
+        cout << "/-------------------\\" << endl;
+        cout << "|Dato: " << dato << endl;
+        cout << "|-------------------" << endl;
+        cout << "|Izquierdo: " << hijoIzquierdo << "\tDerecho: " << hijoDerecho << endl;
+        cout << "\\------------------/" << endl;
+    }
+};
+
+class ArbolBinario {
+    Nodo* raiz;
+public:
+    ArbolBinario() {
+        raiz = NULL;
+    }
+    bool EstaVacia()
+    {
+        if (raiz == NULL)
+            return true;
+        else
+            return false;
+    }
+    void Insertar(int dato) {
+        //aqui vamos a implementar este codigo
+        Nodo* temp = new Nodo(dato);
+        
+		if( EstaVacia() ){
+        	raiz = temp;	
+		} else {
+			int valorRaiz = raiz->getDato();
+			
+			if(dato<valorRaiz){
+				raiz->setHijoIzquierdo(temp);
+			} else {
+				raiz->setHijoDerecho(temp);
+			}
+		}
+    }
+    
+    
+};
+
+void MostrarMenu()
+{
+    cout << "1.- Insertar nodo arbol" << endl;
+	cout << "2.- Salir" << endl;
+}
+
+int main()
+{
+	ArbolBinario edades = ArbolBinario();
+	int elemento;
+    int opcion;
+    do
+    {
+        MostrarMenu();
+        cin >> opcion;
+        switch (opcion)
+        {
+
+        case 1:
+            cout << "Digite el elemento a insertar: " << endl;
+            cin >> elemento;
+            edades.Insertar(elemento);
+            break;
+        case 2:
+        	break;
+
+        default:
+            cout << "Opción no valida." << endl;
+            break;
+        }
+    } while (opcion != 0);
+	
+    return 0;
+}
